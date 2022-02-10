@@ -16,12 +16,12 @@ app.get('/api/hello', function (req, res) {
   res.json({ greeting: 'hello API' });
 });
 
-app.get('/api/:dateString', function (req, res) {
-  const dateString = req.params.dateString;
+app.get(['/api/:dateString', '/api/'], function (req, res) {
   let date;
 
-  if (!!dateString) {
-    if (!!isNaN(dateString)) {
+  if (req.params.dateString) {
+    const dateString = req.params.dateString;
+    if (isNaN(dateString)) {
       date = new Date(dateString);
     } else {
       date = new Date(parseInt(dateString));
